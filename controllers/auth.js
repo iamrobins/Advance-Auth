@@ -58,7 +58,7 @@ exports.forgotPassword = async (req, res, next) => {
 
         await user.save();
 
-        const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+        const resetUrl = `http://localhost:5000/passwordreset/${resetToken}`;
 
         const message = `
             <h1>You have requested a password reset</h1>
@@ -103,7 +103,7 @@ exports.resetPassword = async (req, res, next) => {
         }
 
         user.password = req.body.password;
-        user.resetPasswordToken = undefined;
+        user.resetPasswordToken = undefined; //after the token is being used to reset the password setting these undefined now
         user.resetPasswordExpire = undefined;
         await user.save(); //now it will re-save the password and it will be hashed before being saved.
          
